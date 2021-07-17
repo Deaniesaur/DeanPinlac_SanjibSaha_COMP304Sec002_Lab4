@@ -3,6 +3,8 @@ package com.centennial.deanpinlac_sanjibsaha_comp304sec002;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.content.Intent;
@@ -14,14 +16,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.centennial.deanpinlac_sanjibsaha_comp304sec002.adapter.StudentAdapter;
 import com.centennial.deanpinlac_sanjibsaha_comp304sec002.model.Student;
 import com.centennial.deanpinlac_sanjibsaha_comp304sec002.viewModel.StudentViewModel;
 
 public class StudentActivity extends AppCompatActivity {
     private StudentViewModel studentViewModel;
-    private Student student;
 
     private Button buttonAddStudent;
+    private RecyclerView recyclerStudents;
 
     String professorId;
     @Override
@@ -30,6 +33,8 @@ public class StudentActivity extends AppCompatActivity {
         setContentView(R.layout.activity_student);
 
         buttonAddStudent = findViewById(R.id.buttonAddStudent);
+        recyclerStudents = findViewById(R.id.recyclerStudents);
+
         SharedPreferences sharedPreferences = getSharedPreferences("",
                 Context.MODE_PRIVATE);
         professorId = sharedPreferences.getString("professorId","");
@@ -41,6 +46,9 @@ public class StudentActivity extends AppCompatActivity {
             for(Student student: students){
                 showMessage(student.getFirstName());
             }
+
+            recyclerStudents.setAdapter(new StudentAdapter(students, this));
+            recyclerStudents.setLayoutManager(new LinearLayoutManager(this));
         });
 
         buttonAddStudent.setOnClickListener((v) -> {
