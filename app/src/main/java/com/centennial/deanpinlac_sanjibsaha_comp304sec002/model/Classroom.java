@@ -8,7 +8,7 @@ public class Classroom {
     @PrimaryKey(autoGenerate = true)
     private int classroomId;
     private int studentId;
-    private int professorId;
+    private String professorId;
     private String floor;
     private boolean airConditioned;
 
@@ -28,11 +28,11 @@ public class Classroom {
         this.studentId = studentId;
     }
 
-    public int getProfessorId() {
+    public String getProfessorId() {
         return professorId;
     }
 
-    public void setProfessorId(int professorId) {
+    public void setProfessorId(String professorId) {
         this.professorId = professorId;
     }
 

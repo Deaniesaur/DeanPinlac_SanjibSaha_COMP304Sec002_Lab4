@@ -36,6 +36,8 @@ public class LoginActivity extends AppCompatActivity {
     private EditText editUsername;
     private EditText editPassword;
     private EditText editConfirmPass;
+    private TextView labelAlter;
+    private Button buttonLogin;
 
     private ProfessorViewModel professorViewModel;
 
@@ -57,37 +59,17 @@ public class LoginActivity extends AppCompatActivity {
         editPassword = findViewById(R.id.editPassword);
         editConfirmPass = findViewById(R.id.editConfirmPass);
 
-        Button buttonLogin = findViewById(R.id.buttonLogin);
-        TextView labelAlter = findViewById(R.id.textAlter);
+        buttonLogin = findViewById(R.id.buttonLogin);
+        labelAlter = findViewById(R.id.textAlter);
 
         ConstraintSet constraintSet = new ConstraintSet();
         constraintSet.clone(layoutLogin);
 
         labelAlter.setOnClickListener(v -> {
             if(buttonLogin.getText().toString().equals(LOGIN_LABEL)){
-                constraintSet.connect(
-                        editUsername.getId(),
-                        ConstraintSet.TOP,
-                        layoutRegister.getId(),
-                        ConstraintSet.BOTTOM);
-                constraintSet.applyTo(layoutLogin);
-                layoutRegister.setVisibility(View.VISIBLE);
-                editUsername.setVisibility(View.GONE);
-                editConfirmPass.setVisibility(View.VISIBLE);
-                buttonLogin.setText(REGISTER_LABEL);
-                labelAlter.setText(R.string.alterHaveAccount);
+                transitionToRegister(constraintSet);
             }else{
-                constraintSet.connect(
-                        editUsername.getId(),
-                        ConstraintSet.TOP,
-                        R.id.guideline4,
-                        ConstraintSet.BOTTOM);
-                constraintSet.applyTo(layoutLogin);
-                layoutRegister.setVisibility(View.GONE);
-                editUsername.setVisibility(View.VISIBLE);
-                editConfirmPass.setVisibility(View.GONE);
-                buttonLogin.setText(LOGIN_LABEL);
-                labelAlter.setText(R.string.alterNoAccount);
+                transitionToLogin(constraintSet);
             }
         });
 
@@ -95,6 +77,7 @@ public class LoginActivity extends AppCompatActivity {
         professorViewModel.getInsertResult().observe(this, integer -> {
             if(integer == 1){
                 showMessage("Professor successfully saved");
+                transitionToLogin(constraintSet);
             }else{
                 showMessage("Error saving professor");
             }
@@ -141,11 +124,39 @@ public class LoginActivity extends AppCompatActivity {
         professorViewModel.getAllProfessors().observe(this, professors -> {
             String professorNames = "";
             for(Professor professor: professors){
-                professorNames  += professor.getFirstName() + "\n";
+                professorNames  += professor.getProfessorId() + "\n";
             }
 
             showMessage(professorNames);
         });
+    }
+
+    private void transitionToLogin(ConstraintSet constraintSet){
+        constraintSet.connect(
+                editUsername.getId(),
+                ConstraintSet.TOP,
+                R.id.guideline4,
+                ConstraintSet.BOTTOM);
+        constraintSet.applyTo(layoutLogin);
+        layoutRegister.setVisibility(View.GONE);
+        editUsername.setVisibility(View.VISIBLE);
+        editConfirmPass.setVisibility(View.GONE);
+        buttonLogin.setText(LOGIN_LABEL);
+        labelAlter.setText(R.string.alterNoAccount);
+    }
+
+    private void transitionToRegister(ConstraintSet constraintSet){
+        constraintSet.connect(
+                editUsername.getId(),
+                ConstraintSet.TOP,
+                layoutRegister.getId(),
+                ConstraintSet.BOTTOM);
+        constraintSet.applyTo(layoutLogin);
+        layoutRegister.setVisibility(View.VISIBLE);
+        editUsername.setVisibility(View.GONE);
+        editConfirmPass.setVisibility(View.VISIBLE);
+        buttonLogin.setText(REGISTER_LABEL);
+        labelAlter.setText(R.string.alterHaveAccount);
     }
 
     private void showMessage(String message){
