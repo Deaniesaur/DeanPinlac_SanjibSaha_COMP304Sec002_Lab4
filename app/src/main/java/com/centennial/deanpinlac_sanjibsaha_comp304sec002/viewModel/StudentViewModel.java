@@ -1,6 +1,8 @@
 package com.centennial.deanpinlac_sanjibsaha_comp304sec002.viewModel;
 
 import android.app.Application;
+import android.content.Context;
+import android.content.SharedPreferences;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -16,12 +18,18 @@ public class StudentViewModel extends AndroidViewModel {
     private StudentRepository studentRepository;
     private LiveData<Integer> insertResult;
     private LiveData<List<Student>> allStudents;
+    private LiveData<List<Student>> studentsByProfessorId;
 
     public StudentViewModel(@NonNull Application application) {
         super(application);
-        studentRepository = new StudentRepository(application);
+
+        SharedPreferences sharedPref = application.getSharedPreferences("",
+                Context.MODE_PRIVATE);
+        String professorId = sharedPref.getString("professorId", "");
+        studentRepository = new StudentRepository(application, professorId);
         insertResult = studentRepository.getInsertResult();
         allStudents = studentRepository.getAllStudents();
+        studentsByProfessorId = studentRepository.getStudentsByProfessorId();
     }
 
     public void insert(Student student){
@@ -34,5 +42,9 @@ public class StudentViewModel extends AndroidViewModel {
 
     public LiveData<List<Student>>getAllStudents(){
         return allStudents;
+    }
+
+    public LiveData<List<Student>> getStudentsByProfessorId(){
+        return studentsByProfessorId;
     }
 }
