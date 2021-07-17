@@ -21,37 +21,20 @@ public class StudentActivity extends AppCompatActivity {
     private StudentViewModel studentViewModel;
     private Student student;
 
+    private Button buttonAddStudent;
+
     String professorId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student);
 
+        buttonAddStudent = findViewById(R.id.buttonAddStudent);
         SharedPreferences sharedPreferences = getSharedPreferences("",
                 Context.MODE_PRIVATE);
         professorId = sharedPreferences.getString("professorId","");
 
-        EditText edit = findViewById(R.id.editTextTextPersonName);
-        Button button = findViewById(R.id.buttonSave);
-
         studentViewModel = new ViewModelProvider(this).get(StudentViewModel.class);
-        student = new Student();
-        studentViewModel.getInsertResult().observe(this, integer -> {
-            if(integer == 1){
-                showMessage("Student successfully saved");
-            }else{
-                showMessage("Error saving student");
-            }
-        });
-
-        studentViewModel.getAllStudents().observe(this, students -> {
-            String output="";
-            for(Student student: students){
-                output += student.getFirstName() + "\n";
-            }
-
-            showMessage(output);
-        });
 
         //Retrieve Student by Professor ID
         studentViewModel.getStudentsByProfessorId().observe(this, students -> {
@@ -60,11 +43,9 @@ public class StudentActivity extends AppCompatActivity {
             }
         });
 
-        button.setOnClickListener((v) -> {
-            student.setFirstName(edit.getText().toString());
-            studentViewModel.insert(student);
-            showMessage("button save clicked");
-            edit.setText("");
+        buttonAddStudent.setOnClickListener((v) -> {
+            Intent intent = new Intent(this, UpsertStudentActivity.class);
+            startActivity(intent);
         });
     }
 

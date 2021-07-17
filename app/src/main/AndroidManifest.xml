@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DeanPinlac_SanjibSaha_COMP304Sec002">
         <activity android:name=".ViewClassroomActivity"></activity>
-        <activity android:name=".UpdateInfoActivity" />
+        <activity android:name=".UpsertStudentActivity" />
         <activity android:name=".TestActivity" />
         <activity android:name=".StudentActivity" />
         <activity android:name=".LoginActivity" />
