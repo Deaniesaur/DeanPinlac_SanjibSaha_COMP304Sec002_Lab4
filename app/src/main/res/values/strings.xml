@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">DeanPinlac_SanjibSaha_COMP304Sec002</string>
+    <string name="buttonLoginLabel">Login</string>
+    <string name="buttonRegisterLabel">Register</string>
+    <string name="alterHaveAccount"><u>Already have an account?</u></string>
+    <string name="alterNoAccount"><u>Don\'t have an account yet?</u></string>
 </resources>
