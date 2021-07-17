@@ -1,6 +1,11 @@
 package com.centennial.deanpinlac_sanjibsaha_comp304sec002.model;
 
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
+@Entity
 public class Professor {
+    @PrimaryKey(autoGenerate = true)
     private int professorId;
     private String firstName;
     private String lastName;
