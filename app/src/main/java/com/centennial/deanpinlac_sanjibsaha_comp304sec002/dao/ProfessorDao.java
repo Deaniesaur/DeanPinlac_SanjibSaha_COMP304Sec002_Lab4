@@ -18,4 +18,8 @@ public interface ProfessorDao {
     //Monitoring Query using Live Data
     @Query("select * from Professor order by lastName, firstName")
     LiveData<List<Professor>> getAllProfessors();
+
+    //Query by ProfessorId
+    @Query("select * from Professor where professorId = :professorId and password = :password")
+    Professor getProfessorByIdAndPass(String professorId, String password);
 }
