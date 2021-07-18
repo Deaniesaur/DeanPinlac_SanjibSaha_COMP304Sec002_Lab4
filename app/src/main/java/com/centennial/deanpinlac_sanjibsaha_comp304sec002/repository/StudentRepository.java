@@ -15,14 +15,16 @@ public class StudentRepository {
     private final StudentDao studentDao;
     private MutableLiveData<Integer> insertResult = new MutableLiveData<>();
     private LiveData<List<Student>> studentList;
+    private LiveData<List<Student>> studentsListByProfessorId;
 
-    public StudentRepository(Context context){
+    public StudentRepository(Context context, String professorId){
         //Create a database object
         AppDatabase db = AppDatabase.getInstance(context);
         //Create an interface object
         studentDao = db.studentDao();
         //Call interface method
         studentList = studentDao.getAllStudents();
+        studentsListByProfessorId = studentDao.getStudentsByProfessorId(professorId);
     }
 
     //returns query results as LiveData object
@@ -47,5 +49,9 @@ public class StudentRepository {
                 insertResult.postValue(0);
             }
         }).start();
+    }
+
+    public LiveData<List<Student>> getStudentsByProfessorId(){
+        return studentsListByProfessorId;
     }
 }

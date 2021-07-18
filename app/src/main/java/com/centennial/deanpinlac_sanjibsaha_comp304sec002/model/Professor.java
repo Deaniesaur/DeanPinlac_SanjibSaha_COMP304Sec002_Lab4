@@ -1,22 +1,24 @@
 package com.centennial.deanpinlac_sanjibsaha_comp304sec002.model;
 
+import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 @Entity
 public class Professor {
-    @PrimaryKey(autoGenerate = true)
-    private int professorId;
+    @PrimaryKey
+    @NonNull
+    private String professorId;
     private String firstName;
     private String lastName;
     private String department;
     private String password;
 
-    public int getProfessorId() {
+    public String getProfessorId() {
         return professorId;
     }
 
-    public void setProfessorId(int professorId) {
+    public void setProfessorId(String professorId) {
         this.professorId = professorId;
     }
 
