@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/optionTest"
-        android:title="Student Activity">
+        android:id="@+id/optionStudents"
+        android:title="View Students">
     </item>
     <item
-        android:id="@+id/optionViewClassroom"
-        android:title="Classroom Activity">
+        android:id="@+id/optionClassrooms"
+        android:title="View Classrooms">
     </item>
     <item
         android:id="@+id/optionLogout"

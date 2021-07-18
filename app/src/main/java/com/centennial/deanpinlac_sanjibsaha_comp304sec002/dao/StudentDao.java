@@ -21,4 +21,13 @@ public interface StudentDao {
     //Query by professor Id
     @Query("select * from Student where professorId = :professorId order by lastName, firstName")
     LiveData<List<Student>> getStudentsByProfessorId(String professorId);
+
+    //Remove by StudentId
+    @Query("delete from Student where studentId = :studentId")
+    void removeById(int studentId);
+
+    //Update by StudentId
+    @Query("update Student set firstName = :firstName, lastName = :lastName, " +
+            "department = :department where studentId = :studentId")
+    void updateById(int studentId, String firstName, String lastName, String department);
 }

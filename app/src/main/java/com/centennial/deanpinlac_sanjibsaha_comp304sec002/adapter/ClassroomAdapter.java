@@ -8,64 +8,61 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.lifecycle.LiveData;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.centennial.deanpinlac_sanjibsaha_comp304sec002.R;
-import com.centennial.deanpinlac_sanjibsaha_comp304sec002.StudentActivity;
-import com.centennial.deanpinlac_sanjibsaha_comp304sec002.model.Student;
+import com.centennial.deanpinlac_sanjibsaha_comp304sec002.ViewClassroomActivity;
+import com.centennial.deanpinlac_sanjibsaha_comp304sec002.model.Classroom;
 
-import java.text.DecimalFormat;
 import java.util.List;
 
-public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.ViewHolder> {
+public class ClassroomAdapter extends RecyclerView.Adapter<ClassroomAdapter.ViewHolder> {
 
-    protected List<Student> localDataSet;
-    protected StudentActivity studentActivity;
+    protected List<Classroom> localDataSet;
+    protected ViewClassroomActivity viewClassroomActivity;
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
 
-        protected final TextView rowName;
-        protected final TextView rowDept;
+        protected final TextView rowFloor;
+        protected final TextView rowAir;
         protected final ImageButton buttonEdit;
         protected final ImageButton buttonDelete;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            rowName = itemView.findViewById(R.id.rowName);
-            rowDept = itemView.findViewById(R.id.rowDepartment);
-            buttonEdit = itemView.findViewById(R.id.rowEdit);
-            buttonDelete = itemView.findViewById(R.id.rowDelete);
+            rowFloor = itemView.findViewById(R.id.rowFloor);
+            rowAir = itemView.findViewById(R.id.rowAirConditioned);
+            buttonEdit = itemView.findViewById(R.id.rowClassroomEdit);
+            buttonDelete = itemView.findViewById(R.id.rowClassroomDelete);
         }
     }
 
-    public StudentAdapter(List<Student> students, Context context){
-        localDataSet = students;
-        studentActivity = (StudentActivity) context;
+    public ClassroomAdapter(List<Classroom> Classrooms, Context context){
+        localDataSet = Classrooms;
+        viewClassroomActivity = (ViewClassroomActivity) context;
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType){
         View view = LayoutInflater.from(viewGroup.getContext())
-                .inflate(R.layout.student_row, viewGroup, false);
+                .inflate(R.layout.classroom_row, viewGroup, false);
 
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, final int position){
-        Student student = localDataSet.get(position);
-        String name = student.getLastName() + ", " + student.getFirstName();
-        viewHolder.rowName.setText(name);
-        viewHolder.rowDept.setText(student.getDepartment());
+        Classroom classroom = localDataSet.get(position);
+        viewHolder.rowFloor.setText(classroom.getFloor());
+        viewHolder.rowAir.setText(String.valueOf(classroom.isAirConditioned()));
 
         viewHolder.buttonEdit.setOnClickListener(v -> {
-            studentActivity.editStudent(student);
+            viewClassroomActivity.editClassroom(classroom);
         });
 
         viewHolder.buttonDelete.setOnClickListener(v -> {
-            studentActivity.removeStudent(student.getStudentId());
+            viewClassroomActivity.removeClassroom(classroom.getClassroomId());
         });
     }
 

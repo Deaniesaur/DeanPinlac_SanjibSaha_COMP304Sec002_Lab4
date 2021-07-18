@@ -6,6 +6,7 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
+import com.centennial.deanpinlac_sanjibsaha_comp304sec002.dao.ClassroomDao;
 import com.centennial.deanpinlac_sanjibsaha_comp304sec002.dao.ProfessorDao;
 import com.centennial.deanpinlac_sanjibsaha_comp304sec002.dao.StudentDao;
 import com.centennial.deanpinlac_sanjibsaha_comp304sec002.model.Classroom;
@@ -19,6 +20,7 @@ public abstract class AppDatabase extends RoomDatabase {
 
     public abstract ProfessorDao professorDao();
     public abstract StudentDao studentDao();
+    public abstract ClassroomDao classroomDao();
 
     public static synchronized AppDatabase getInstance(Context context){
         if(INSTANCE == null){

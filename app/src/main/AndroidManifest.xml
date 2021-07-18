@@ -10,16 +10,22 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DeanPinlac_SanjibSaha_COMP304Sec002">
         <activity android:name=".ViewClassroomActivity"></activity>
-        <activity android:name=".UpsertStudentActivity" />
-        <activity android:name=".TestActivity" />
-        <activity android:name=".StudentActivity" />
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".UpsertStudentActivity" android:launchMode="singleInstance"/>
+        <activity android:name=".UpsertClassroomActivity" android:launchMode="singleInstance"/>
+        <activity android:name=".StudentActivity" android:launchMode="singleInstance"/>
+        <activity android:name=".LoginActivity" android:launchMode="singleInstance">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".MainActivity">
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
+
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
         </activity>
     </application>
 

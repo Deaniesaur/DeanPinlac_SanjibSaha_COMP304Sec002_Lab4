@@ -10,6 +10,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Button;
@@ -18,9 +19,11 @@ import android.widget.Toast;
 
 import com.centennial.deanpinlac_sanjibsaha_comp304sec002.adapter.StudentAdapter;
 import com.centennial.deanpinlac_sanjibsaha_comp304sec002.model.Student;
+import com.centennial.deanpinlac_sanjibsaha_comp304sec002.utils.Common;
 import com.centennial.deanpinlac_sanjibsaha_comp304sec002.viewModel.StudentViewModel;
 
-public class StudentActivity extends AppCompatActivity {
+public class StudentActivity extends MainActivity {
+    private SharedPreferences sharedPreferences;
     private StudentViewModel studentViewModel;
 
     private Button buttonAddStudent;
@@ -35,18 +38,13 @@ public class StudentActivity extends AppCompatActivity {
         buttonAddStudent = findViewById(R.id.buttonAddStudent);
         recyclerStudents = findViewById(R.id.recyclerStudents);
 
-        SharedPreferences sharedPreferences = getSharedPreferences("",
-                Context.MODE_PRIVATE);
+        sharedPreferences = getSharedPreferences("", Context.MODE_PRIVATE);
         professorId = sharedPreferences.getString("professorId","");
 
         studentViewModel = new ViewModelProvider(this).get(StudentViewModel.class);
 
         //Retrieve Student by Professor ID
         studentViewModel.getStudentsByProfessorId().observe(this, students -> {
-            for(Student student: students){
-                showMessage(student.getFirstName());
-            }
-
             recyclerStudents.setAdapter(new StudentAdapter(students, this));
             recyclerStudents.setLayoutManager(new LinearLayoutManager(this));
         });
@@ -57,17 +55,14 @@ public class StudentActivity extends AppCompatActivity {
         });
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(android.view.Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu, menu);
-        return true;
+    public void editStudent(Student student){
+        sharedPreferences.edit().putString("editStudent", Common.convertToJson(student)).apply();
+        Intent intent = new Intent(this, UpsertStudentActivity.class);
+        startActivity(intent);
     }
 
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        showMessage(item.toString());
-        return super.onOptionsItemSelected(item);
+    public void removeStudent(int studentId){
+        studentViewModel.removeById(studentId);
     }
 
     private void showMessage(String message){
