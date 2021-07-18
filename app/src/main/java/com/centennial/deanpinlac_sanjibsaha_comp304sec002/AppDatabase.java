@@ -6,6 +6,7 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
+import com.centennial.deanpinlac_sanjibsaha_comp304sec002.dao.ProfessorDao;
 import com.centennial.deanpinlac_sanjibsaha_comp304sec002.dao.StudentDao;
 import com.centennial.deanpinlac_sanjibsaha_comp304sec002.model.Classroom;
 import com.centennial.deanpinlac_sanjibsaha_comp304sec002.model.Professor;
@@ -16,6 +17,7 @@ public abstract class AppDatabase extends RoomDatabase {
     private static volatile AppDatabase INSTANCE;
     private static final String DATABASE_NAME = "ClassroomDB";
 
+    public abstract ProfessorDao professorDao();
     public abstract StudentDao studentDao();
 
     public static synchronized AppDatabase getInstance(Context context){

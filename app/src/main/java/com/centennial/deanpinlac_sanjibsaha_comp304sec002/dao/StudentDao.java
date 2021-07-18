@@ -17,4 +17,8 @@ public interface StudentDao {
     //Monitoring Query using Live Data
     @Query("select * from Student order by lastName, firstName")
     LiveData<List<Student>> getAllStudents();
+
+    //Query by professor Id
+    @Query("select * from Student where professorId = :professorId order by lastName, firstName")
+    LiveData<List<Student>> getStudentsByProfessorId(String professorId);
 }

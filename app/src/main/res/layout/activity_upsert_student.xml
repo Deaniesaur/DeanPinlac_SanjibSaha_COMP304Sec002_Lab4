@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".UpsertStudentActivity">
+
+    <TextView
+        android:id="@+id/labelAddStudent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add Student"
+        app:layout_constraintBottom_toTopOf="@+id/confirmAddStudent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/editStudentFirstName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:hint="First Name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/labelAddStudent" />
+
+    <EditText
+        android:id="@+id/editStudentLastName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Last Name"
+        app:layout_constraintEnd_toEndOf="@+id/editStudentFirstName"
+        app:layout_constraintStart_toStartOf="@+id/editStudentFirstName"
+        app:layout_constraintTop_toBottomOf="@+id/editStudentFirstName" />
+
+    <EditText
+        android:id="@+id/editStudentDepartment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Department"
+        app:layout_constraintEnd_toEndOf="@+id/editStudentLastName"
+        app:layout_constraintStart_toStartOf="@+id/editStudentLastName"
+        app:layout_constraintTop_toBottomOf="@+id/editStudentLastName"/>
+
+    <Button
+        android:id="@+id/confirmAddStudent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="50dp"
+        android:text="Confirm Add"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editStudentDepartment" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
