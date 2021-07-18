@@ -4,15 +4,31 @@
     <string name="buttonRegisterLabel">Register</string>
     <string name="alterHaveAccount"><u>Already have an account?</u></string>
     <string name="alterNoAccount"><u>Don\'t have an account yet?</u></string>
-    <string name="hintConfirmPass">confirm password</string>
-    <string name="hintPass">password</string>
-    <string name="hintUsername">username</string>
-    <string name="hintDept">department</string>
-    <string name="hintLastName">last name</string>
-    <string name="hintFirstName">firstname</string>
+    <string name="hintConfirmPass">Confirm Password</string>
+    <string name="hintPass">Password</string>
+    <string name="hintUsername">Username</string>
+    <string name="hintDept">Department</string>
+    <string name="hintLastName">Last Name</string>
+    <string name="hintFirstName">First Name</string>
     <string name="hintProfessorId">professor id</string>
     <string name="hintFloor">Floor</string>
     <string name="hintAirCon">AirConditioned</string>
+    <string name="labelConfirm">Confirm</string>
+    <string name="labelAircon">with Aircon:</string>
+    <string name="hintProfessor">Professor ID:</string>
+    <string name="hintStudent">Student ID:</string>
+    <string name="hintId">ID:</string>
+    <string name="labelClassroom">Classroom</string>
+    <string name="titleStudents">Students</string>
+    <string name="labelAddStudent">Add Student</string>
+    <string name="labelStudent">Student</string>
+    <string name="labelStudentSpinner">Student :</string>
+    <string name="labelAddClassroom">Add Classroom to Student</string>
+    <string name="labelFloor">Floor:</string>
+    <string name="labelStudentName">Student Name</string>
+    <string name="labelName">Name:</string>
+    <string name="labelDept">Department:</string>
+    <string name="labelStudentDept">Student Department</string>
 
     <string-array name="yesNo">
         <item>Yes</item>

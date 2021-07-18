@@ -20,7 +20,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/spacing10"
-        android:text="Student : "
+        android:text="@string/labelStudentSpinner"
         app:layout_constraintTop_toTopOf="@id/spinnerStudent"
         app:layout_constraintBottom_toBottomOf="@id/spinnerStudent"
         app:layout_constraintStart_toStartOf="@id/recyclerClassrooms"/>
@@ -50,7 +50,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="28dp"
-        android:text="Add Classroom to Student"
+        android:text="@string/labelAddClassroom"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"

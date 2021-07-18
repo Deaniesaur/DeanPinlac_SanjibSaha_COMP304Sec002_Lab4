@@ -24,7 +24,7 @@
                 android:id="@+id/labelName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Name: "
+                android:text="@string/labelName"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"/>
 
@@ -33,7 +33,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/spacing20"
-                android:text="Student Name"
+                android:text="@string/labelStudentName"
                 app:layout_constraintTop_toBottomOf="@id/labelName"
                 app:layout_constraintStart_toStartOf="parent"/>
 
@@ -42,7 +42,7 @@
                 android:id="@+id/labelDept"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Department: "
+                android:text="@string/labelDept"
                 app:layout_constraintTop_toBottomOf="@id/rowName"
                 app:layout_constraintStart_toStartOf="parent"/>
 
@@ -51,7 +51,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/spacing20"
-                android:text="Student Department"
+                android:text="@string/labelStudentDept"
                 app:layout_constraintTop_toBottomOf="@id/labelDept"
                 app:layout_constraintStart_toStartOf="parent"/>
 
