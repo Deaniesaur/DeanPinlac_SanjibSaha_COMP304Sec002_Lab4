@@ -10,6 +10,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Button;
@@ -21,6 +22,7 @@ import com.centennial.deanpinlac_sanjibsaha_comp304sec002.model.Student;
 import com.centennial.deanpinlac_sanjibsaha_comp304sec002.viewModel.StudentViewModel;
 
 public class StudentActivity extends AppCompatActivity {
+    private SharedPreferences sharedPreferences;
     private StudentViewModel studentViewModel;
 
     private Button buttonAddStudent;
@@ -35,8 +37,7 @@ public class StudentActivity extends AppCompatActivity {
         buttonAddStudent = findViewById(R.id.buttonAddStudent);
         recyclerStudents = findViewById(R.id.recyclerStudents);
 
-        SharedPreferences sharedPreferences = getSharedPreferences("",
-                Context.MODE_PRIVATE);
+        sharedPreferences = getSharedPreferences("", Context.MODE_PRIVATE);
         professorId = sharedPreferences.getString("professorId","");
 
         studentViewModel = new ViewModelProvider(this).get(StudentViewModel.class);
@@ -67,6 +68,23 @@ public class StudentActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         showMessage(item.toString());
+        Intent intent;
+        switch (item.getItemId()){
+            case R.id.optionStudents:
+                intent = new Intent(this, StudentActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.optionClassrooms:
+                intent = new Intent(this, ViewClassroomActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.optionLogout:
+                intent = new Intent(this, LoginActivity.class);
+                sharedPreferences.edit().remove("professorId").apply();
+                startActivity(intent);
+                finish();
+                break;
+        }
         return super.onOptionsItemSelected(item);
     }
 

@@ -24,8 +24,10 @@ import com.centennial.deanpinlac_sanjibsaha_comp304sec002.model.Student;
 import com.centennial.deanpinlac_sanjibsaha_comp304sec002.viewModel.ProfessorViewModel;
 
 public class LoginActivity extends AppCompatActivity {
+    private SharedPreferences sharedPreferences;
     private String LOGIN_LABEL;
     private String REGISTER_LABEL;
+    private String professorId;
 
     private ConstraintLayout layoutLogin;
     private ConstraintLayout layoutRegister;
@@ -45,6 +47,9 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        sharedPreferences = getSharedPreferences("", Context.MODE_PRIVATE);
+        professorId = sharedPreferences.getString("professorId", "");
 
         LOGIN_LABEL = getString(R.string.buttonLoginLabel);
         REGISTER_LABEL = getString(R.string.buttonRegisterLabel);
@@ -88,15 +93,9 @@ public class LoginActivity extends AppCompatActivity {
                 showMessage("Authentication Failed");
             }else{
                 showMessage("Logging in...");
-                Intent intent = new Intent(this, StudentActivity.class);
 
-                SharedPreferences.Editor editor = getSharedPreferences("",
-                        Context.MODE_PRIVATE).edit();
-                editor.putString("professorId", professor.getProfessorId());
-                editor.apply();
-
-                startActivity(intent);
-                finish();
+                sharedPreferences.edit().putString("professorId", professorId).apply();
+                login();
             }
         });
 
@@ -129,6 +128,21 @@ public class LoginActivity extends AppCompatActivity {
 
             showMessage(professorNames);
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if(!professorId.isEmpty())
+            login();
+    }
+
+    private void login(){
+        Intent intent = new Intent(this, StudentActivity.class);
+
+        startActivity(intent);
+        finish();
     }
 
     private void transitionToLogin(ConstraintSet constraintSet){
