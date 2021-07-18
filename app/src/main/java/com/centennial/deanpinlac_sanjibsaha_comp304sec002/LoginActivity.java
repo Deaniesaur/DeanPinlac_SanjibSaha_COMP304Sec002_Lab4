@@ -74,15 +74,15 @@ public class LoginActivity extends AppCompatActivity {
             if(buttonLogin.getText().toString().equals(LOGIN_LABEL)){
                 transitionToRegister(constraintSet);
             }else{
-                transitionToLogin(constraintSet);
+                transitionToLogin(constraintSet, "");
             }
         });
 
         professorViewModel = new ViewModelProvider(this).get(ProfessorViewModel.class);
         professorViewModel.getInsertResult().observe(this, integer -> {
             if(integer == 1){
-                showMessage("Professor successfully saved");
-                transitionToLogin(constraintSet);
+                showMessage("Registration Successful");
+                transitionToLogin(constraintSet, editProfessorId.getText().toString());
             }else{
                 showMessage("Error saving professor");
             }
@@ -96,6 +96,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 professorId = professor.getProfessorId();
                 sharedPreferences.edit().putString("professorId", professorId).apply();
+
                 login();
             }
         });
@@ -121,14 +122,14 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        professorViewModel.getAllProfessors().observe(this, professors -> {
-            String professorNames = "";
-            for(Professor professor: professors){
-                professorNames  += professor.getProfessorId() + "\n";
-            }
-
-            showMessage(professorNames);
-        });
+//        professorViewModel.getAllProfessors().observe(this, professors -> {
+//            String professorNames = "";
+//            for(Professor professor: professors){
+//                professorNames  += professor.getProfessorId() + "\n";
+//            }
+//
+//            showMessage(professorNames);
+//        });
     }
 
     @Override
@@ -146,7 +147,7 @@ public class LoginActivity extends AppCompatActivity {
         finish();
     }
 
-    private void transitionToLogin(ConstraintSet constraintSet){
+    private void transitionToLogin(ConstraintSet constraintSet, String username){
         constraintSet.connect(
                 editUsername.getId(),
                 ConstraintSet.TOP,
@@ -158,6 +159,15 @@ public class LoginActivity extends AppCompatActivity {
         editConfirmPass.setVisibility(View.GONE);
         buttonLogin.setText(LOGIN_LABEL);
         labelAlter.setText(R.string.alterNoAccount);
+
+        //Reset values
+        editUsername.setText(username);
+        editProfessorId.setText("");
+        editFirstName.setText("");
+        editLastName.setText("");
+        editDepartment.setText("");
+        editPassword.setText("");
+        editConfirmPass.setText("");
     }
 
     private void transitionToRegister(ConstraintSet constraintSet){

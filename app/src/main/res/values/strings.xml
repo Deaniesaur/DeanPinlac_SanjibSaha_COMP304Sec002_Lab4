@@ -11,6 +11,8 @@
     <string name="hintLastName">last name</string>
     <string name="hintFirstName">firstname</string>
     <string name="hintProfessorId">professor id</string>
+    <string name="hintFloor">Floor</string>
+    <string name="hintAirCon">AirConditioned</string>
 
     <string-array name="yesNo">
         <item>Yes</item>

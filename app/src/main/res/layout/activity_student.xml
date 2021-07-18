@@ -29,6 +29,7 @@
         app:layout_constraintTop_toBottomOf="@+id/labelStudents"/>
 
     <Button
+        style="@style/Button"
         android:id="@+id/buttonAddStudent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
