@@ -4,6 +4,13 @@
     <string name="buttonRegisterLabel">Register</string>
     <string name="alterHaveAccount"><u>Already have an account?</u></string>
     <string name="alterNoAccount"><u>Don\'t have an account yet?</u></string>
+    <string name="hintConfirmPass">confirm password</string>
+    <string name="hintPass">password</string>
+    <string name="hintUsername">username</string>
+    <string name="hintDept">department</string>
+    <string name="hintLastName">last name</string>
+    <string name="hintFirstName">firstname</string>
+    <string name="hintProfessorId">professor id</string>
 
     <string-array name="yesNo">
         <item>Yes</item>
