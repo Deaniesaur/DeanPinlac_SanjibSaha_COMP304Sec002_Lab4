@@ -26,7 +26,7 @@ public class UpsertStudentActivity extends AppCompatActivity {
     private EditText editFirstName;
     private EditText editLastName;
     private EditText editDepartment;
-    private Button buttonAdd;
+    private Button buttonConfirm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +38,7 @@ public class UpsertStudentActivity extends AppCompatActivity {
         editFirstName = findViewById(R.id.editStudentFirstName);
         editLastName = findViewById(R.id.editStudentLastName);
         editDepartment = findViewById(R.id.editStudentDepartment);
-        buttonAdd = findViewById(R.id.confirmStudent);
+        buttonConfirm = findViewById(R.id.confirmStudent);
 
         sharedPreferences = getSharedPreferences("",
                 Context.MODE_PRIVATE);
@@ -55,9 +55,11 @@ public class UpsertStudentActivity extends AppCompatActivity {
             editFirstName.setText(student.getFirstName());
             editLastName.setText(student.getLastName());
             editDepartment.setText(student.getDepartment());
+            buttonConfirm.setText("Confirm Edit");
         }else{
             //Add
             editStudentId.setVisibility(View.GONE);
+            buttonConfirm.setText("Confirm Add");
         }
         String displayProfessorId = "ProfessorID: " + professorId;
         editProfessorId.setText(displayProfessorId);
@@ -73,7 +75,7 @@ public class UpsertStudentActivity extends AppCompatActivity {
             }
         });
 
-        buttonAdd.setOnClickListener((v) -> {
+        buttonConfirm.setOnClickListener((v) -> {
             if(student == null){
                 insertStudent();
             }else{

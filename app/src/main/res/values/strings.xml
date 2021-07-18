@@ -4,4 +4,9 @@
     <string name="buttonRegisterLabel">Register</string>
     <string name="alterHaveAccount"><u>Already have an account?</u></string>
     <string name="alterNoAccount"><u>Don\'t have an account yet?</u></string>
+
+    <string-array name="yesNo">
+        <item>Yes</item>
+        <item>No</item>
+    </string-array>
 </resources>
