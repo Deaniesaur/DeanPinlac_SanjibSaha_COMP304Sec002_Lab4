@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">DeanPinlac_SanjibSaha_COMP304Sec002</string>
+    <string name="app_name">DeanPinlac_SanjibSaha_COMP304Sec002_Lab4_Ex1</string>
     <string name="buttonLoginLabel">Login</string>
     <string name="buttonRegisterLabel">Register</string>
     <string name="alterHaveAccount"><u>Already have an account?</u></string>
