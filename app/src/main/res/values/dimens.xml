@@ -3,4 +3,6 @@
     <dimen name="spacing100">100dp</dimen>
     <dimen name="margin10">10dp</dimen>
     <dimen name="radius">5dp</dimen>
+    <dimen name="spacing20">20dp</dimen>
+    <dimen name="spacing10">10dp</dimen>
 </resources>

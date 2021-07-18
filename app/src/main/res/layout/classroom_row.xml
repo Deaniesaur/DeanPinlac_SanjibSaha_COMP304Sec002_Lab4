@@ -8,49 +8,71 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin10"
+        android:layout_marginTop="3dp"
         android:layout_marginStart="@dimen/margin10"
         android:layout_marginEnd="@dimen/margin10"
+        android:backgroundTint="@color/palette3"
         app:cardCornerRadius="@dimen/radius">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:padding="@dimen/spacing10"
             android:orientation="vertical">
+
+            <TextView
+                style="@style/Label"
+                android:id="@+id/labelFloor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Floor: "
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
             <TextView
                 android:id="@+id/rowFloor"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Classroom Floor"
-                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginStart="@dimen/spacing20"
+                android:text="@string/hintFloor"
+                app:layout_constraintTop_toBottomOf="@id/labelFloor"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                style="@style/Label"
+                android:id="@+id/labelAirConditioned"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="AirConditioned: "
+                app:layout_constraintTop_toBottomOf="@id/rowFloor"
                 app:layout_constraintStart_toStartOf="parent" />
 
             <TextView
                 android:id="@+id/rowAirConditioned"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Classroom AirConditioned"
-                app:layout_constraintTop_toBottomOf="@id/rowFloor"
+                android:layout_marginStart="@dimen/spacing20"
+                android:text="@string/hintAirCon"
+                app:layout_constraintTop_toBottomOf="@id/labelAirConditioned"
                 app:layout_constraintStart_toStartOf="parent"/>
 
             <ImageButton
+                style="@style/ImageButton"
                 android:id="@+id/rowClassroomEdit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_edit"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent
-"               app:layout_constraintEnd_toStartOf="@id/rowClassroomDelete"/>
+                app:layout_constraintEnd_toStartOf="@+id/rowClassroomDelete"/>
 
             <ImageButton
+                style="@style/ImageButton"
                 android:id="@+id/rowClassroomDelete"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_delete"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent
-"               app:layout_constraintEnd_toEndOf="parent"/>
+                app:layout_constraintEnd_toEndOf="parent"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

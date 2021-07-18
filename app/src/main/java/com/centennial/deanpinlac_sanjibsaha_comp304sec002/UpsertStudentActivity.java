@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProvider;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -20,20 +21,24 @@ public class UpsertStudentActivity extends AppCompatActivity {
     private Student student;
     private String professorId;
 
+    private EditText editStudentId;
+    private EditText editProfessorId;
     private EditText editFirstName;
     private EditText editLastName;
     private EditText editDepartment;
-    private Button buttonAdd;
+    private Button buttonConfirm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upsert_student);
 
+        editStudentId = findViewById(R.id.editStudentId);
+        editProfessorId = findViewById(R.id.editStudentProfessor);
         editFirstName = findViewById(R.id.editStudentFirstName);
         editLastName = findViewById(R.id.editStudentLastName);
         editDepartment = findViewById(R.id.editStudentDepartment);
-        buttonAdd = findViewById(R.id.confirmAddStudent);
+        buttonConfirm = findViewById(R.id.confirmStudent);
 
         sharedPreferences = getSharedPreferences("",
                 Context.MODE_PRIVATE);
@@ -41,11 +46,23 @@ public class UpsertStudentActivity extends AppCompatActivity {
 
         String studentJson = sharedPreferences.getString("editStudent", "");
         if(!studentJson.equals("")){
+            //Edit
             student = Common.convertJsonToObject(studentJson, Student.class);
+            String displayStudentId = "ID: " + student.getStudentId();
+
+            editStudentId.setVisibility(View.VISIBLE);
+            editStudentId.setText(displayStudentId);
             editFirstName.setText(student.getFirstName());
             editLastName.setText(student.getLastName());
             editDepartment.setText(student.getDepartment());
+            buttonConfirm.setText("Confirm Edit");
+        }else{
+            //Add
+            editStudentId.setVisibility(View.GONE);
+            buttonConfirm.setText("Confirm Add");
         }
+        String displayProfessorId = "ProfessorID: " + professorId;
+        editProfessorId.setText(displayProfessorId);
 
         studentViewModel = new ViewModelProvider(this).get(StudentViewModel.class);
 
@@ -58,7 +75,7 @@ public class UpsertStudentActivity extends AppCompatActivity {
             }
         });
 
-        buttonAdd.setOnClickListener((v) -> {
+        buttonConfirm.setOnClickListener((v) -> {
             if(student == null){
                 insertStudent();
             }else{

@@ -3,15 +3,15 @@ package com.centennial.deanpinlac_sanjibsaha_comp304sec002;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.centennial.deanpinlac_sanjibsaha_comp304sec002.model.Classroom;
-import com.centennial.deanpinlac_sanjibsaha_comp304sec002.model.Student;
 import com.centennial.deanpinlac_sanjibsaha_comp304sec002.utils.Common;
 import com.centennial.deanpinlac_sanjibsaha_comp304sec002.viewModel.ClassroomViewModel;
 
@@ -21,9 +21,12 @@ public class UpsertClassroomActivity extends AppCompatActivity {
     private String professorId;
     private int studentId;
 
+    private EditText editId;
+    private EditText editStudentId;
+    private EditText editProfessorId;
     private EditText editFloor;
-    private EditText editAir;
-    private Button buttonConfirmAdd;
+    private Spinner spinnerAirConditioned;
+    private Button buttonConfirm;
     private ClassroomViewModel classroomViewModel;
 
     @Override
@@ -31,8 +34,12 @@ public class UpsertClassroomActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upsert_classroom);
 
+        editId = findViewById(R.id.editClassroomId);
+        editStudentId = findViewById(R.id.editClassroomStudent);
+        editProfessorId = findViewById(R.id.editClassroomProfessor);
         editFloor = findViewById(R.id.editFloor);
-        editAir = findViewById(R.id.editAirConditioned);
+        spinnerAirConditioned = findViewById(R.id.spinnerAirConditioned);
+        buttonConfirm = findViewById(R.id.confirmClassroom);
 
         sharedPreferences = getSharedPreferences("", MODE_PRIVATE);
         professorId = sharedPreferences.getString("professorId", "");
@@ -41,9 +48,27 @@ public class UpsertClassroomActivity extends AppCompatActivity {
         String classroomJson = sharedPreferences.getString("editClassroom", "");
         if(!classroomJson.equals("")){
             classroom = Common.convertJsonToObject(classroomJson, Classroom.class);
+
+            String displayId = "ID: " + classroom.getClassroomId();
+            editId.setVisibility(View.VISIBLE);
+            editId.setText(displayId);
             editFloor.setText(classroom.getFloor());
-            editAir.setText(String.valueOf(classroom.isAirConditioned()));
+            if(classroom.isAirConditioned()){
+                spinnerAirConditioned.setSelection(0);
+            }else{
+                spinnerAirConditioned.setSelection(1);
+            }
+
+            buttonConfirm.setText("Confirm Edit");
+        }else{
+            editId.setVisibility(View.GONE);
+            buttonConfirm.setText("Confirm Add");
         }
+
+        String displayStudentId = "Student ID: " + studentId;
+        String displayProfessorId = "Professor ID: " + professorId;
+        editStudentId.setText(displayStudentId);
+        editProfessorId.setText(displayProfessorId);
 
         classroomViewModel = new ViewModelProvider(this).get(ClassroomViewModel.class);
         classroomViewModel.getInsertResult().observe(this, result -> {
@@ -53,8 +78,8 @@ public class UpsertClassroomActivity extends AppCompatActivity {
                 showMessage("Insert Failed");
             }
         });
-        buttonConfirmAdd = findViewById(R.id.confirmAddClassroom);
-        buttonConfirmAdd.setOnClickListener(v -> {
+
+        buttonConfirm.setOnClickListener(v -> {
             if(classroom == null){
                 insertClassroom();
             }else{
@@ -82,7 +107,11 @@ public class UpsertClassroomActivity extends AppCompatActivity {
 
     private void editClassroom(){
         classroom.setFloor(editFloor.getText().toString());
-        classroom.setAirConditioned(true);
+        int position = spinnerAirConditioned.getSelectedItemPosition();
+        if(position == 0)
+            classroom.setAirConditioned(true);
+        else
+            classroom.setAirConditioned(false);
         classroomViewModel.update(classroom);
     }
 

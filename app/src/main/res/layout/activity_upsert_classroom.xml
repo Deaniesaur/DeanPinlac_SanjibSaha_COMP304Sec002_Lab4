@@ -7,45 +7,88 @@
     tools:context=".UpsertClassroomActivity">
 
     <TextView
-        android:id="@+id/labelAddClassroom"
+        android:id="@+id/labelClassroom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Add Classroom"
+        android:layout_marginBottom="24dp"
+        android:text="Classroom"
+        app:layout_constraintBottom_toTopOf="@+id/editClassroomId"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/editClassroomId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="ID: "
+        android:enabled="false"
+        app:layout_constraintBottom_toTopOf="@+id/editClassroomStudent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/editClassroomStudent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Student ID: "
+        android:enabled="false"
+        app:layout_constraintBottom_toTopOf="@+id/editClassroomProfessor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/editClassroomProfessor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Professor ID: "
+        android:enabled="false"
         app:layout_constraintBottom_toTopOf="@+id/editFloor"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:id="@+id/editFloor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
         android:ems="10"
         android:hint="Floor"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/labelAddClassroom" />
-
-    <EditText
-        android:id="@+id/editAirConditioned"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Air Conditioned"
-        app:layout_constraintEnd_toEndOf="@+id/editFloor"
-        app:layout_constraintStart_toStartOf="@+id/editFloor"
-        app:layout_constraintTop_toBottomOf="@+id/editFloor" />
-
-    <Button
-        android:id="@+id/confirmAddClassroom"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="50dp"
-        android:text="Confirm Add"
+        android:inputType="textCapWords"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/labelAirConditioned"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Airconditioned: "
+        app:layout_constraintTop_toTopOf="@id/spinnerAirConditioned"
+        app:layout_constraintBottom_toBottomOf="@id/spinnerAirConditioned"
+        app:layout_constraintStart_toStartOf="@id/editFloor"/>
+
+    <Spinner
+        android:id="@+id/spinnerAirConditioned"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/editFloor"
+        app:layout_constraintStart_toEndOf="@id/labelAirConditioned"
+        app:layout_constraintEnd_toEndOf="@id/editFloor"
+        android:entries="@array/yesNo"/>
+
+    <Button
+        style="@style/Button"
+        android:id="@+id/confirmClassroom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Confirm"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editAirConditioned" />
-    
+        app:layout_constraintTop_toBottomOf="@+id/spinnerAirConditioned" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

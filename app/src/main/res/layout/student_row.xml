@@ -8,48 +8,70 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin10"
+        android:layout_marginTop="3dp"
         android:layout_marginStart="@dimen/margin10"
         android:layout_marginEnd="@dimen/margin10"
-        app:cardCornerRadius="@dimen/radius">
+        app:cardCornerRadius="@dimen/radius"
+        android:backgroundTint="@color/palette3">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:padding="@dimen/spacing10">
+
+            <TextView
+                style="@style/Label"
+                android:id="@+id/labelName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Name: "
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
 
             <TextView
                 android:id="@+id/rowName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing20"
                 android:text="Student Name"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/labelName"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <TextView
+                style="@style/Label"
+                android:id="@+id/labelDept"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Department: "
+                app:layout_constraintTop_toBottomOf="@id/rowName"
                 app:layout_constraintStart_toStartOf="parent"/>
 
             <TextView
                 android:id="@+id/rowDepartment"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing20"
                 android:text="Student Department"
-                app:layout_constraintTop_toBottomOf="@id/rowName"
+                app:layout_constraintTop_toBottomOf="@id/labelDept"
                 app:layout_constraintStart_toStartOf="parent"/>
 
             <ImageButton
+                style="@style/ImageButton"
                 android:id="@+id/rowEdit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_edit"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent
-"               app:layout_constraintEnd_toStartOf="@id/rowDelete"/>
+                app:layout_constraintEnd_toStartOf="@+id/rowDelete"/>
 
             <ImageButton
+                style="@style/ImageButton"
                 android:id="@+id/rowDelete"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_delete"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent
-"               app:layout_constraintEnd_toEndOf="parent"/>
+                app:layout_constraintEnd_toEndOf="parent"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

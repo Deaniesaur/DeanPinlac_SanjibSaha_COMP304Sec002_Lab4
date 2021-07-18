@@ -11,6 +11,23 @@
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+
         <!-- Customize your theme here. -->
+        <item name="android:windowBackground">@color/palette1</item>
+        <item name="android:textColor">@color/palette8</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="Button">
+        <item name="android:backgroundTint">@color/palette7</item>
+    </style>
+    
+    <style name="ImageButton">
+        <item name="android:tint">@color/palette1</item>>
+        <item name="backgroundTint">@color/palette8</item>
+    </style>
+
+    <style name="Label">
+        <item name="android:textSize">15dp</item>>
     </style>
 </resources>
