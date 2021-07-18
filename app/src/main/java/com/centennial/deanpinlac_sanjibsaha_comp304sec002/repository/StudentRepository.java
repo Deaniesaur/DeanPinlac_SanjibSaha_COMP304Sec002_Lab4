@@ -54,4 +54,10 @@ public class StudentRepository {
     public LiveData<List<Student>> getStudentsByProfessorId(){
         return studentsListByProfessorId;
     }
+
+    public void removeById(int studentId){
+        new Thread(() -> {
+            studentDao.removeById(studentId);
+        }).start();
+    }
 }

@@ -12,6 +12,7 @@ import androidx.lifecycle.LiveData;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.centennial.deanpinlac_sanjibsaha_comp304sec002.R;
+import com.centennial.deanpinlac_sanjibsaha_comp304sec002.StudentActivity;
 import com.centennial.deanpinlac_sanjibsaha_comp304sec002.model.Student;
 
 import java.text.DecimalFormat;
@@ -26,12 +27,16 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.ViewHold
 
         protected final TextView rowName;
         protected final TextView rowDept;
+        protected final ImageButton buttonEdit;
+        protected final ImageButton buttonDelete;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             rowName = itemView.findViewById(R.id.rowName);
             rowDept = itemView.findViewById(R.id.rowDepartment);
+            buttonEdit = itemView.findViewById(R.id.rowEdit);
+            buttonDelete = itemView.findViewById(R.id.rowDelete);
         }
     }
 
@@ -55,10 +60,10 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.ViewHold
         viewHolder.rowName.setText(name);
         viewHolder.rowDept.setText(student.getDepartment());
 
-//        viewHolder.buttonDelete.setOnClickListener(v -> {
+        viewHolder.buttonDelete.setOnClickListener(v -> {
 //            removeAt(position);
-//            ((CheckoutActivity) context).itemRemoved();
-//        });
+            ((StudentActivity) myContext).removeStudent(student.getStudentId());
+        });
     }
 
     public void removeAt(int position){

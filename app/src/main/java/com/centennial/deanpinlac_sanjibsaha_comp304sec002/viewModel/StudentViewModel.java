@@ -47,4 +47,8 @@ public class StudentViewModel extends AndroidViewModel {
     public LiveData<List<Student>> getStudentsByProfessorId(){
         return studentsByProfessorId;
     }
+
+    public void removeById(int studentId){
+        studentRepository.removeById(studentId);
+    }
 }

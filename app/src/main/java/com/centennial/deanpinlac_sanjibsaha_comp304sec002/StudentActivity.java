@@ -58,6 +58,11 @@ public class StudentActivity extends MainActivity {
         });
     }
 
+    public void removeStudent(int studentId){
+        showMessage("Removing");
+        studentViewModel.removeById(studentId);
+    }
+
     private void showMessage(String message){
         Toast.makeText(StudentActivity.this, message, Toast.LENGTH_SHORT).show();
     }
