@@ -56,7 +56,6 @@ public class ViewClassroomActivity extends MainActivity {
                 int studentId = student.getStudentId();
                 sharedPreferences.edit().putInt("studentId", studentId).apply();
 
-                showMessage("Send Query: " + student.getStudentId());
                 classroomViewModel.getClassroomsByStudentId(studentId).observe( ViewClassroomActivity.this, classrooms -> {
                     for(Classroom classroom: classrooms){
 
@@ -72,10 +71,9 @@ public class ViewClassroomActivity extends MainActivity {
 
             }
         });
-        String[] sample = {"a", "b", "c"};
 
         studentViewModel = new ViewModelProvider(this).get(StudentViewModel.class);
-        studentViewModel.getAllStudents().observe(this, students -> {
+        studentViewModel.getStudentsByProfessorId().observe(this, students -> {
             this.students = students;
             ArrayAdapter<Student> spinnerAdapter = new ArrayAdapter<>(
                     this, android.R.layout.simple_spinner_dropdown_item, this.students);

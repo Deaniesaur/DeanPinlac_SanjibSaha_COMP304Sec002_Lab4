@@ -56,20 +56,11 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="Floor"
+        android:inputType="textCapWords"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
-
-<!--    <EditText-->
-<!--        android:id="@+id/editAirConditioned"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:ems="10"-->
-<!--        android:hint="Air Conditioned"-->
-<!--        app:layout_constraintTop_toBottomOf="@id/editFloor"-->
-<!--        app:layout_constraintEnd_toEndOf="@+id/editFloor"-->
-<!--        app:layout_constraintStart_toStartOf="@+id/editFloor" />-->
 
     <TextView
         android:id="@+id/labelAirConditioned"
