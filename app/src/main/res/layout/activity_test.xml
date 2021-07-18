@@ -1,9 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout
+xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:orientation="vertical"
+android:padding="10dp"
+android:background="#F8F2C1">
+<androidx.appcompat.widget.AppCompatSpinner
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".TestActivity">
+    android:layout_height="wrap_content"
+    android:id="@+id/spin"
+    android:layout_marginTop="30dp"/>
+<EditText
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/floor"
+    android:hint="@string/floor"
+    android:textSize="20sp"
+    android:background="@drawable/editbg"
+    android:padding="10dp"
+    android:textColorHint="@color/colorPrimary"
+    android:importantForAutofill="no"
+    android:inputType=""
+    tools:targetApi="o"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+<EditText
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/isAirconditioned"
+    android:hint="@string/isAirconditioned"
+    android:background="@drawable/editbg"
+    android:padding="10dp"
+    android:layout_marginTop="10dp"
+    android:textColorHint="@color/colorPrimary"
+    android:textSize="20sp"
+    android:inputType=""
+    android:autofillHints=""
+    tools:targetApi="o"/>
+<Button
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:text="@string/submit"
+    android:id="@+id/submit"
+    android:background="@color/colorPrimary"
+    android:textColor="@android:color/white"
+    android:layout_marginTop="20sp"/>
+
+</LinearLayout>
