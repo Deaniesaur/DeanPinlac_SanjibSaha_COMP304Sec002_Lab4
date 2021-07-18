@@ -49,4 +49,15 @@ public class ClassroomViewModel extends AndroidViewModel {
         return classroomRepository.getClassroomsByStudentId(studentId);
     }
 
+    public void removeClassroomById(int classroomId){
+        classroomRepository.removeClassroomById(classroomId);
+    }
+
+    public void updateClassroomById(int classroomId, String floor, boolean airConditioned){
+        classroomRepository.updateById(classroomId, floor, airConditioned);
+    }
+
+    public void update(Classroom classroom){
+        classroomRepository.update(classroom);
+    }
 }

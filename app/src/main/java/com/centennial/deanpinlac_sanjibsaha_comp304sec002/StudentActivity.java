@@ -56,15 +56,12 @@ public class StudentActivity extends MainActivity {
     }
 
     public void editStudent(Student student){
-        showMessage("Editing");
-
         sharedPreferences.edit().putString("editStudent", Common.convertToJson(student)).apply();
         Intent intent = new Intent(this, UpsertStudentActivity.class);
         startActivity(intent);
     }
 
     public void removeStudent(int studentId){
-        showMessage("Removing");
         studentViewModel.removeById(studentId);
     }
 

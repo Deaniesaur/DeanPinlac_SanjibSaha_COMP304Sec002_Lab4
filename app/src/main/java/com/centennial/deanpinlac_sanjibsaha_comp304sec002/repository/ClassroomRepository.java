@@ -51,4 +51,21 @@ public class ClassroomRepository {
         }).start();
     }
 
+    public void removeClassroomById(int classroomId){
+        new Thread(() -> {
+            classroomDao.removeClassroomById(classroomId);
+        }).start();
+    }
+
+    public void updateById(int classroomId, String floor, boolean airConditioned){
+        new Thread(() -> {
+            classroomDao.updateById(classroomId, floor, airConditioned);
+        }).start();
+    }
+
+    public void update(Classroom classroom){
+        new Thread(() -> {
+            classroomDao.update(classroom);
+        }).start();
+    }
 }

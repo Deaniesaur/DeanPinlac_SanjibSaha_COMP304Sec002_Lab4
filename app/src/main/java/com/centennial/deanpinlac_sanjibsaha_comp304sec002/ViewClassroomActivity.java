@@ -21,6 +21,7 @@ import com.centennial.deanpinlac_sanjibsaha_comp304sec002.adapter.ClassroomAdapt
 import com.centennial.deanpinlac_sanjibsaha_comp304sec002.adapter.StudentAdapter;
 import com.centennial.deanpinlac_sanjibsaha_comp304sec002.model.Classroom;
 import com.centennial.deanpinlac_sanjibsaha_comp304sec002.model.Student;
+import com.centennial.deanpinlac_sanjibsaha_comp304sec002.utils.Common;
 import com.centennial.deanpinlac_sanjibsaha_comp304sec002.viewModel.ClassroomViewModel;
 import com.centennial.deanpinlac_sanjibsaha_comp304sec002.viewModel.StudentViewModel;
 
@@ -90,6 +91,16 @@ public class ViewClassroomActivity extends MainActivity {
             Intent intent = new Intent(this, UpsertClassroomActivity.class);
             startActivity(intent);
         });
+    }
+
+    public void editClassroom(Classroom classroom){
+        sharedPreferences.edit().putString("editClassroom", Common.convertToJson(classroom)).apply();
+        Intent intent = new Intent(this, UpsertClassroomActivity.class);
+        startActivity(intent);
+    }
+
+    public void removeClassroom(int classroomId){
+        classroomViewModel.removeClassroomById(classroomId);
     }
 
     private void showMessage(String message){
