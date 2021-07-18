@@ -11,9 +11,11 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.centennial.deanpinlac_sanjibsaha_comp304sec002.model.Student;
+import com.centennial.deanpinlac_sanjibsaha_comp304sec002.utils.Common;
 import com.centennial.deanpinlac_sanjibsaha_comp304sec002.viewModel.StudentViewModel;
 
 public class UpsertStudentActivity extends AppCompatActivity {
+    private SharedPreferences sharedPreferences;
     private StudentViewModel studentViewModel;
     private Student student;
     private String professorId;
@@ -28,14 +30,22 @@ public class UpsertStudentActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upsert_student);
 
-        SharedPreferences sharedPreferences = getSharedPreferences("",
-                Context.MODE_PRIVATE);
-        professorId = sharedPreferences.getString("professorId","");
-
         editFirstName = findViewById(R.id.editStudentFirstName);
         editLastName = findViewById(R.id.editStudentLastName);
         editDepartment = findViewById(R.id.editStudentDepartment);
         buttonAdd = findViewById(R.id.confirmAddStudent);
+
+        sharedPreferences = getSharedPreferences("",
+                Context.MODE_PRIVATE);
+        professorId = sharedPreferences.getString("professorId","");
+
+        String studentJson = sharedPreferences.getString("editStudent", "");
+        if(!studentJson.equals("")){
+            student = Common.convertJsonToObject(studentJson, Student.class);
+            editFirstName.setText(student.getFirstName());
+            editLastName.setText(student.getLastName());
+            editDepartment.setText(student.getDepartment());
+        }
 
         studentViewModel = new ViewModelProvider(this).get(StudentViewModel.class);
 
@@ -49,14 +59,37 @@ public class UpsertStudentActivity extends AppCompatActivity {
         });
 
         buttonAdd.setOnClickListener((v) -> {
-            Student student = new Student();
-            student.setProfessorId(professorId);
-            student.setFirstName(editFirstName.getText().toString());
-            student.setLastName(editLastName.getText().toString());
-            student.setDepartment(editDepartment.getText().toString());
-
-            studentViewModel.insert(student);
+            if(student == null){
+                insertStudent();
+            }else{
+                editStudent();
+            }
+            finish();
         });
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        sharedPreferences.edit().remove("editStudent").apply();
+    }
+
+    private void insertStudent(){
+        Student student = new Student();
+        student.setProfessorId(professorId);
+        student.setFirstName(editFirstName.getText().toString());
+        student.setLastName(editLastName.getText().toString());
+        student.setDepartment(editDepartment.getText().toString());
+
+        studentViewModel.insert(student);
+    }
+
+    private void editStudent(){
+        studentViewModel.updateById(
+                student.getStudentId(),
+                editFirstName.getText().toString(),
+                editLastName.getText().toString(),
+                editDepartment.getText().toString());
     }
 
     private void showMessage(String message){

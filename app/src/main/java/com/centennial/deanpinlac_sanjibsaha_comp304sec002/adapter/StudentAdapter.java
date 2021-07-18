@@ -21,7 +21,7 @@ import java.util.List;
 public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.ViewHolder> {
 
     protected List<Student> localDataSet;
-    protected Context myContext;
+    protected StudentActivity studentActivity;
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
 
@@ -42,7 +42,7 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.ViewHold
 
     public StudentAdapter(List<Student> students, Context context){
         localDataSet = students;
-        myContext = context;
+        studentActivity = (StudentActivity) context;
     }
 
     @Override
@@ -60,9 +60,12 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.ViewHold
         viewHolder.rowName.setText(name);
         viewHolder.rowDept.setText(student.getDepartment());
 
+        viewHolder.buttonEdit.setOnClickListener(v -> {
+            studentActivity.editStudent(student);
+        });
+
         viewHolder.buttonDelete.setOnClickListener(v -> {
-//            removeAt(position);
-            ((StudentActivity) myContext).removeStudent(student.getStudentId());
+            studentActivity.removeStudent(student.getStudentId());
         });
     }
 

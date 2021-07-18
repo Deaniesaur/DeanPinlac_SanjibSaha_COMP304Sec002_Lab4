@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import com.centennial.deanpinlac_sanjibsaha_comp304sec002.adapter.StudentAdapter;
 import com.centennial.deanpinlac_sanjibsaha_comp304sec002.model.Student;
+import com.centennial.deanpinlac_sanjibsaha_comp304sec002.utils.Common;
 import com.centennial.deanpinlac_sanjibsaha_comp304sec002.viewModel.StudentViewModel;
 
 public class StudentActivity extends MainActivity {
@@ -44,10 +45,6 @@ public class StudentActivity extends MainActivity {
 
         //Retrieve Student by Professor ID
         studentViewModel.getStudentsByProfessorId().observe(this, students -> {
-            for(Student student: students){
-                showMessage(student.getFirstName());
-            }
-
             recyclerStudents.setAdapter(new StudentAdapter(students, this));
             recyclerStudents.setLayoutManager(new LinearLayoutManager(this));
         });
@@ -56,6 +53,14 @@ public class StudentActivity extends MainActivity {
             Intent intent = new Intent(this, UpsertStudentActivity.class);
             startActivity(intent);
         });
+    }
+
+    public void editStudent(Student student){
+        showMessage("Editing");
+
+        sharedPreferences.edit().putString("editStudent", Common.convertToJson(student)).apply();
+        Intent intent = new Intent(this, UpsertStudentActivity.class);
+        startActivity(intent);
     }
 
     public void removeStudent(int studentId){

@@ -60,4 +60,10 @@ public class StudentRepository {
             studentDao.removeById(studentId);
         }).start();
     }
+
+    public void updateById(int studentId, String firstName, String lastName, String department){
+        new Thread(() -> {
+            studentDao.updateById(studentId, firstName, lastName, department);
+        }).start();
+    }
 }
