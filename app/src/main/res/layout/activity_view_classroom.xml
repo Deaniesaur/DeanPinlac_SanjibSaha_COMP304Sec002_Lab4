@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ViewClassroomActivity">
+    tools:context="com.centennial.deanpinlac_sanjibsaha_comp304sec002_Lab4_Ex1.ViewClassroomActivity">
 
     <Spinner
         android:id="@+id/spinnerStudent"

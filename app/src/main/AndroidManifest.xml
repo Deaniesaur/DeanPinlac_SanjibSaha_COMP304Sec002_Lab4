@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.centennial.deanpinlac_sanjibsaha_comp304sec002">
+    package="com.centennial.deanpinlac_sanjibsaha_comp304sec002_Lab4_Ex1">
 
     <application
         android:allowBackup="true"
@@ -9,18 +9,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.DeanPinlac_SanjibSaha_COMP304Sec002">
-        <activity android:name=".ViewClassroomActivity"></activity>
-        <activity android:name=".UpsertStudentActivity" android:launchMode="singleInstance"/>
-        <activity android:name=".UpsertClassroomActivity" android:launchMode="singleInstance"/>
-        <activity android:name=".StudentActivity" android:launchMode="singleInstance"/>
-        <activity android:name=".LoginActivity" android:launchMode="singleInstance">
+        <activity android:name="com.centennial.deanpinlac_sanjibsaha_comp304sec002_Lab4_Ex1.ViewClassroomActivity"></activity>
+        <activity android:name="com.centennial.deanpinlac_sanjibsaha_comp304sec002_Lab4_Ex1.UpsertStudentActivity" android:launchMode="singleInstance"/>
+        <activity android:name="com.centennial.deanpinlac_sanjibsaha_comp304sec002_Lab4_Ex1.UpsertClassroomActivity" android:launchMode="singleInstance"/>
+        <activity android:name="com.centennial.deanpinlac_sanjibsaha_comp304sec002_Lab4_Ex1.StudentActivity" android:launchMode="singleInstance"/>
+        <activity android:name="com.centennial.deanpinlac_sanjibsaha_comp304sec002_Lab4_Ex1.LoginActivity" android:launchMode="singleInstance">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity">
+        <activity android:name="com.centennial.deanpinlac_sanjibsaha_comp304sec002_Lab4_Ex1.MainActivity">
 <!--            <intent-filter>-->
 <!--                <action android:name="android.intent.action.MAIN" />-->
 

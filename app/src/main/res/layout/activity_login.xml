@@ -5,7 +5,7 @@
     android:id="@+id/layoutLogin"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginActivity">
+    tools:context="com.centennial.deanpinlac_sanjibsaha_comp304sec002_Lab4_Ex1.LoginActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layoutRegister"
