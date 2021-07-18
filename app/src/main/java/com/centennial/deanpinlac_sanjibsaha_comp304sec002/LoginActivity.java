@@ -94,6 +94,7 @@ public class LoginActivity extends AppCompatActivity {
             }else{
                 showMessage("Logging in...");
 
+                professorId = professor.getProfessorId();
                 sharedPreferences.edit().putString("professorId", professorId).apply();
                 login();
             }
