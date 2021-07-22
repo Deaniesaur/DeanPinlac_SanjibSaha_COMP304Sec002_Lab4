@@ -1,5 +1,6 @@
 package com.centennial.deanpinlac_sanjibsaha_comp304sec002_Lab4_Ex1;
 
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,12 +17,14 @@ import android.widget.Toast;
 
 import com.centennial.deanpinlac_sanjibsaha_comp304sec002_Lab4_Ex1.R;
 import com.centennial.deanpinlac_sanjibsaha_comp304sec002_Lab4_Ex1.adapter.ClassroomAdapter;
+import com.centennial.deanpinlac_sanjibsaha_comp304sec002_Lab4_Ex1.dao.StudentDao;
 import com.centennial.deanpinlac_sanjibsaha_comp304sec002_Lab4_Ex1.model.Classroom;
 import com.centennial.deanpinlac_sanjibsaha_comp304sec002_Lab4_Ex1.model.Student;
 import com.centennial.deanpinlac_sanjibsaha_comp304sec002_Lab4_Ex1.utils.Common;
 import com.centennial.deanpinlac_sanjibsaha_comp304sec002_Lab4_Ex1.viewModel.ClassroomViewModel;
 import com.centennial.deanpinlac_sanjibsaha_comp304sec002_Lab4_Ex1.viewModel.StudentViewModel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ViewClassroomActivity extends MainActivity {
@@ -31,8 +34,9 @@ public class ViewClassroomActivity extends MainActivity {
 
     private Spinner spinnerStudents;
     private RecyclerView recyclerClassrooms;
+    private ClassroomAdapter adapter;
     private List<Student> students;
-    private String professorId;
+    public static List<Classroom> classrooms;
 
     private Button buttonAddClassroom;
 
@@ -42,7 +46,6 @@ public class ViewClassroomActivity extends MainActivity {
         setContentView(R.layout.activity_view_classroom);
 
         sharedPreferences = getSharedPreferences("", MODE_PRIVATE);
-        professorId = sharedPreferences.getString("professorId", "");
 
         spinnerStudents = findViewById(R.id.spinnerStudent);
         spinnerStudents.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -52,14 +55,10 @@ public class ViewClassroomActivity extends MainActivity {
                 int studentId = student.getStudentId();
                 sharedPreferences.edit().putInt("studentId", studentId).apply();
 
-                classroomViewModel.getClassroomsByStudentId(studentId).observe( ViewClassroomActivity.this, classrooms -> {
-                    for(Classroom classroom: classrooms){
-
-                    };
-
-                    recyclerClassrooms.setAdapter(new ClassroomAdapter(classrooms, ViewClassroomActivity.this ));
-                    recyclerClassrooms.setLayoutManager(new LinearLayoutManager(ViewClassroomActivity.this));
-                });
+                classroomViewModel.getClassroomsByStudentId(studentId).observe(
+                        ViewClassroomActivity.this,
+                        classObserver
+                );
             }
 
             @Override
@@ -77,7 +76,10 @@ public class ViewClassroomActivity extends MainActivity {
         });
 
         recyclerClassrooms = findViewById(R.id.recyclerClassrooms);
-
+        classrooms = new ArrayList<>();
+        adapter = new ClassroomAdapter(classrooms, ViewClassroomActivity.this);
+        recyclerClassrooms.setAdapter(adapter);
+        recyclerClassrooms.setLayoutManager(new LinearLayoutManager(this));
         classroomViewModel = new ViewModelProvider(this).get(ClassroomViewModel.class);
 
         buttonAddClassroom = findViewById(R.id.buttonAddClassroom);
@@ -86,6 +88,26 @@ public class ViewClassroomActivity extends MainActivity {
             startActivity(intent);
         });
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        Student student = (Student) spinnerStudents.getSelectedItem();
+        if(student != null){
+            int studentId = student.getStudentId();
+            classroomViewModel.getClassroomsByStudentId(studentId).observe(this, classObserver);
+        }
+    }
+
+    private Observer<List<Classroom>> classObserver = new Observer<List<Classroom>>() {
+        @Override
+        public void onChanged(List<Classroom> classrooms) {
+            ViewClassroomActivity.classrooms.clear();
+            ViewClassroomActivity.classrooms.addAll(classrooms);
+            adapter.notifyDataSetChanged();
+        }
+    };
 
     public void editClassroom(Classroom classroom){
         sharedPreferences.edit().putString("editClassroom", Common.convertToJson(classroom)).apply();
