@@ -1,5 +1,6 @@
 package com.centennial.deanpinlac_sanjibsaha_comp304sec002_Lab4_Ex1;
 
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -36,7 +37,8 @@ public class ViewClassroomActivity extends MainActivity {
     private RecyclerView recyclerClassrooms;
     private ClassroomAdapter adapter;
     private List<Student> students;
-    public static List<Classroom> classrooms;
+    public static List<Classroom> classrooms = new ArrayList<>();
+    private LiveData<List<Classroom>> liveClassrooms;
 
     private Button buttonAddClassroom;
 
@@ -55,7 +57,10 @@ public class ViewClassroomActivity extends MainActivity {
                 int studentId = student.getStudentId();
                 sharedPreferences.edit().putInt("studentId", studentId).apply();
 
-                classroomViewModel.getClassroomsByStudentId(studentId).observe(
+                if(liveClassrooms != null)
+                    liveClassrooms.removeObservers(ViewClassroomActivity.this);
+                liveClassrooms = classroomViewModel.getClassroomsByStudentId(studentId);
+                liveClassrooms.observe(
                         ViewClassroomActivity.this,
                         classObserver
                 );
@@ -76,7 +81,6 @@ public class ViewClassroomActivity extends MainActivity {
         });
 
         recyclerClassrooms = findViewById(R.id.recyclerClassrooms);
-        classrooms = new ArrayList<>();
         adapter = new ClassroomAdapter(classrooms, ViewClassroomActivity.this);
         recyclerClassrooms.setAdapter(adapter);
         recyclerClassrooms.setLayoutManager(new LinearLayoutManager(this));
@@ -87,17 +91,6 @@ public class ViewClassroomActivity extends MainActivity {
             Intent intent = new Intent(this, UpsertClassroomActivity.class);
             startActivity(intent);
         });
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-        Student student = (Student) spinnerStudents.getSelectedItem();
-        if(student != null){
-            int studentId = student.getStudentId();
-            classroomViewModel.getClassroomsByStudentId(studentId).observe(this, classObserver);
-        }
     }
 
     private Observer<List<Classroom>> classObserver = new Observer<List<Classroom>>() {
